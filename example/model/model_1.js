@@ -10,7 +10,9 @@ User.init(
   },
   {
     sequelize: seqlused,
-    modelName: "user",
+    modelName: "alis",
+    freezeTableName: false,
+    tableName:"mahdi bokone"
   },
 );
 
