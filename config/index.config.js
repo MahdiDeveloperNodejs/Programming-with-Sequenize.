@@ -1,24 +1,30 @@
-const { default: Sequelize } = require("@sequelize/core");
+
+const { Sequelize } = require("@sequelize/core");
+const { MySqlDialect } = require("@sequelize/mysql");
 require("dotenv").config();
 
 const seqlused = new Sequelize({
-  dialect: "mysql",
+  dialect: MySqlDialect,
   host: "localhost",
-  pasword: "0026061155",
   port: 3306,
-  username: "root",
+  user: "root",
+  password: process.env.DB_PASSWORD || "0026061155",
   database: "nodejs",
 });
 
-seqlused
-  .authenticate()
-  .then(async () => {
+async function connectDB() {
+  try {
+    await seqlused.authenticate();
+    console.log("Connected to MySQL successfully");
+
     await seqlused.sync({ alter: true });
-    console.log(`conected to mysql`);
-  })
-  .catch((err) => {
-    console.log(`server mysql ride ${err.message}`);
-  });
+    console.log("Database models synchronized");
+  } catch (err) {
+    console.error("MySQL error:", err.message);
+  }
+}
+
+connectDB();
 
 module.exports = {
   seqlused,
