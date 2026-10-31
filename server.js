@@ -2,6 +2,6 @@ const { default: Sequelize } = require("@sequelize/core");
 const { seqlused } = require("./config/index.config");
 
 // Sequelize
-// seqlused 
+// seqlused
 
-require("./example/model/model_1")
+require("./example/model/model_2");
